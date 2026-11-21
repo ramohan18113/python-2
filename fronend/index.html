@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TaskFlow | Project Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">T</div>
+            <span>TaskFlow</span>
+        </div>
+
+        <p class="nav-heading">WORKSPACE</p>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-item active">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>✓</span>
+                My Tasks
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◈</span>
+                Projects
+            </a>
+
+            <a href="#" class="nav-item">
+                <span>◷</span>
+                Activity
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="profile">
+
+                <div class="avatar">AD</div>
+
+                <div class="profile-details">
+                    <strong>Admin User</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <div class="breadcrumb">
+                    Workspace / Dashboard
+                </div>
+
+                <h1>Dashboard</h1>
+            </div>
+
+            <div class="topbar-actions">
+
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    API Online
+                </div>
+
+                <button class="primary-button"
+                        onclick="openModal()">
+                    + New Task
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- Welcome Section -->
+        <section class="welcome">
+
+            <div>
+                <h2>Welcome back, Admin 👋</h2>
+
+                <p>
+                    Here's an overview of your team's progress.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Total Tasks</span>
+                    <span class="stat-icon purple">▦</span>
+                </div>
+
+                <h3 id="total">0</h3>
+
+                <p>Tasks in workspace</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-icon green">✓</span>
+                </div>
+
+                <h3 id="completed">0</h3>
+
+                <p class="positive">Successfully completed</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">In Progress</span>
+                    <span class="stat-icon blue">◷</span>
+                </div>
+
+                <h3 id="in_progress">0</h3>
+
+                <p>Currently being worked on</p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-top">
+                    <span class="stat-label">Pending</span>
+                    <span class="stat-icon orange">!</span>
+                </div>
+
+                <h3 id="pending">0</h3>
+
+                <p>Awaiting action</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Task Management -->
+        <section class="tasks-card">
+
+            <div class="tasks-header">
+
+                <div>
+                    <h2>Task Management</h2>
+
+                    <p>
+                        View, search, and manage your tasks.
+                    </p>
+                </div>
+
+                <div class="filters">
+
+                    <select id="statusFilter"
+                            onchange="loadTasks()">
+
+                        <option value="All">All Tasks</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+
+                    </select>
+
+                    <input
+                        id="searchInput"
+                        type="search"
+                        placeholder="Search tasks..."
+                        oninput="loadTasks()"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>TASK</th>
+                            <th>PROJECT</th>
+                            <th>ASSIGNEE</th>
+                            <th>PRIORITY</th>
+                            <th>STATUS</th>
+                            <th>DUE DATE</th>
+                            <th>ACTION</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="taskTable">
+
+                        <tr>
+                            <td colspan="7" class="loading">
+                                Loading tasks...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <footer>
+            TaskFlow Dashboard · Development Environment
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- Create Task Modal -->
+<div class="modal-overlay"
+     id="taskModal">
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Create Task</h2>
+                <p>Add a task to your workspace.</p>
+            </div>
+
+            <button class="close-button"
+                    onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="taskForm">
+
+            <div class="form-group">
+
+                <label for="title">
+                    Task Title
+                </label>
+
+                <input
+                    id="title"
+                    name="title"
+                    required
+                    placeholder="Enter task title"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="3"
+                    placeholder="Describe the task"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="assigned_to">
+                    Assigned To
+                </label>
+
+                <input
+                    id="assigned_to"
+                    name="assigned_to"
+                    placeholder="Team member"
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="priority">
+                        Priority
+                    </label>
+
+                    <select id="priority"
+                            name="priority">
+
+                        <option>Low</option>
+                        <option selected>Medium</option>
+                        <option>High</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="project_id">
+                        Project
+                    </label>
+
+                    <select id="project_id"
+                            name="project_id">
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="due_date">
+                    Due Date
+                </label>
+
+                <input
+                    id="due_date"
+                    name="due_date"
+                    type="date"
+                >
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button type="button"
+                        class="secondary-button"
+                        onclick="closeModal()">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="primary-button">
+
+                    Create Task
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<div id="toast"
+     class="toast">
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
