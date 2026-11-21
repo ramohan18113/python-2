@@ -8,7 +8,7 @@
 // 192.168.1.10:5000
 
 const API_BASE =
-    `http://${window.location.hostname}:5000/api`;
+    `http://${window.location.hostname}:api`;
 
 
 // =====================================

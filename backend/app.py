@@ -16,11 +16,17 @@ CORS(app)
 # Database Configuration
 # ---------------------------------------
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
+#DB_HOST = os.getenv("DB_HOST", "localhost")
+#DB_PORT = os.getenv("DB_PORT", "5432")
+#DB_NAME = os.getenv("DB_NAME", "taskflow_db")
+#DB_USER = os.getenv("DB_USER", "taskflow_user")
+#DB_PASSWORD = os.getenv("DB_PASSWORD", "taskflow_password")
+
+DB_HOST = os.getenv("DB_HOST", "db")
 DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME", "taskflow_db")
-DB_USER = os.getenv("DB_USER", "taskflow_user")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "taskflow_password")
+DB_NAME = os.getenv("DB_NAME", "taskflow")
+DB_USER = os.getenv("DB_USER", "taskflow_app")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 DATABASE_URL = (
     f"postgresql://{DB_USER}:{DB_PASSWORD}"
@@ -395,5 +401,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True
+        debug=False
     )
