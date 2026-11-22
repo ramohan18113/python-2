@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+from sqlalchemy.engine import URL
 from dotenv import load_dotenv
 
 
@@ -27,14 +28,16 @@ DB_NAME = os.getenv("DB_NAME", "tasktracker")
 DB_USER = os.getenv("DB_USER", "taskuser")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "taskpassword")
 
-
-DATABASE_URL = (
-    f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}"
-    f"@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+database_url = URL.create(
+    drivername="postgresql+psycopg2",
+    username=DB_USER,
+    password=DB_PASSWORD,
+    host=DB_HOST,
+    port=int(DB_PORT),
+    database=DB_NAME,
 )
 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
