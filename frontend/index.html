@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Task Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header>
+            <p class="eyebrow">CONTAINERIZATION PRACTICE</p>
+
+            <h1>Task Tracker</h1>
+
+            <p class="subtitle">
+                A small app to practice deploying
+                a multi-service application.
+            </p>
+        </header>
+
+
+        <section class="form-card">
+
+            <h2>Create a task</h2>
+
+            <form id="task-form">
+
+                <label for="title">Task title</label>
+
+                <input
+                    id="title"
+                    name="title"
+                    maxlength="200"
+                    placeholder="What needs to be done?"
+                    required
+                >
+
+                <label for="description">
+                    Description (optional)
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="3"
+                    placeholder="Add some details"
+                ></textarea>
+
+                <button type="submit">
+                    Add task
+                </button>
+
+            </form>
+
+            <p id="form-message" role="status"></p>
+
+        </section>
+
+
+        <section class="tasks-section">
+
+            <div class="section-heading">
+
+                <h2>Your tasks</h2>
+
+                <button
+                    id="refresh-button"
+                    class="secondary"
+                    type="button"
+                >
+                    Refresh
+                </button>
+
+            </div>
+
+            <p id="api-status" class="status">
+                Connecting to API...
+            </p>
+
+            <ul id="task-list" class="task-list"></ul>
+
+        </section>
+
+    </main>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f3f6fb;
+
+    color: #172033;
+}
+
+.container {
+    width: min(900px, calc(100% - 32px));
+
+    margin: 40px auto;
+}
+
+header {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    color: #5369d8;
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+    font-size: .8rem;
+}
+
+h1 {
+    margin: 8px 0;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.subtitle {
+    color: #647084;
+}
+
+.form-card,
+.tasks-section {
+    background: white;
+
+    padding: 24px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 8px 28px rgba(23, 32, 51, .06);
+
+    margin-bottom: 20px;
+}
+
+form {
+    display: grid;
+
+    gap: 10px;
+}
+
+input,
+textarea {
+    width: 100%;
+
+    border: 1px solid #d5dbe6;
+
+    border-radius: 8px;
+
+    padding: 12px;
+
+    font: inherit;
+}
+
+button {
+    border: 0;
+
+    border-radius: 8px;
+
+    padding: 10px 14px;
+
+    font: inherit;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    background: #465bd8;
+
+    color: white;
+}
+
+button:hover {
+    filter: brightness(.95);
+}
+
+.secondary {
+    background: #e9edf8;
+
+    color: #27345e;
+}
+
+.danger {
+    background: #fee8e7;
+
+    color: #a52b27;
+}
+
+#form-message,
+.status {
+    color: #526176;
+
+    min-height: 1.2em;
+}
+
+.error {
+    color: #b42318 !important;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.task-list {
+    list-style: none;
+
+    padding: 0;
+
+    display: grid;
+
+    gap: 12px;
+}
+
+.task {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 16px;
+
+    border: 1px solid #e2e7ef;
+
+    border-radius: 12px;
+
+    padding: 16px;
+}
+
+.task h3 {
+    margin: 0 0 6px;
+}
+
+.task p {
+    margin: 0;
+
+    color: #68758a;
+
+    white-space: pre-wrap;
+}
+
+.task.completed h3 {
+    text-decoration: line-through;
+
+    color: #7a8495;
+}
+
+.task-actions {
+    display: flex;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.empty {
+    padding: 20px;
+
+    color: #68758a;
+
+    text-align: center;
+}
+
+
+@media (max-width: 600px) {
+
+    .task {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .task-actions {
+        width: 100%;
+    }
+
+}
